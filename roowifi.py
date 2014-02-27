@@ -14,16 +14,22 @@ class Roomba(object):
         self.user = user
         self.passwd = passwd
         self.auth = (self.user, self.passwd)
-        self._telemetry = self.telemetry()
-        import pprint
-        pprint.pprint(self._telemetry)
+
+        try:
+            self._telemetry = self.telemetry()
+        except:
+            raise Exception('Robot cannot be contacted at {%s}' % self.ip)
+
+        self.charge = self._telemetry['response']['r18']['value']
+        self.capacity = self._telemetry['response']['r19']['value']
+        self.battery = 1. * self.charge / self.capacity
 
     def telemetry(self):
         """
-        Roomba method which fetchs telemetry data about the robot.  Returns
+        Roomba method which fetches telemetry data about the robot.  Returns
         a dictionary.
         """
-        r = requests.get('http://' + self.ip + '/roowifi.json', auth=self.auth)
+        r = requests.get('http://' + self.ip + '/roomba.json', auth=self.auth)
         return json.loads(r.text)
 
     def clean(self):
@@ -76,9 +82,6 @@ def main():
         kwargs['user'] = args.user
     if args.passwd:
         kwargs['passwd'] = args.passwd
-
-    print(args)
-    print(kwargs)
 
     roomba = Roomba(args.ip_address, **kwargs)
 
