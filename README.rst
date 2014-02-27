@@ -1,7 +1,7 @@
 Roowifi
 =======
 
-Roowifi is a module for issueing commands to and collecting data from Roomba robots via the RooWifi_ wifi-to-serial device.
+Roowifi is a module for issuing commands to and collecting data from Roomba robots via the RooWifi_ wifi-to-serial device.
 
 Don't let your Roomba go unhacked!
 
