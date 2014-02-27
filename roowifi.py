@@ -20,9 +20,9 @@ class Roomba(object):
         except:
             raise Exception('Robot cannot be contacted at {%s}' % self.ip)
 
-        self.charge = self._telemetry['response']['r18']['value']
-        self.capacity = self._telemetry['response']['r19']['value']
-        self.battery = 1. * self.charge / self.capacity
+        self.charge = float(self._telemetry['response']['r18']['value'])
+        self.capacity = float(self._telemetry['response']['r19']['value'])
+        self.battery = self.charge / self.capacity
 
     def telemetry(self):
         """
