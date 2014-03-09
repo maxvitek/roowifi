@@ -22,7 +22,10 @@ class Roomba(object):
 
         self.charge = float(self._telemetry['response']['r18']['value'])
         self.capacity = float(self._telemetry['response']['r19']['value'])
-        self.battery = self.charge / self.capacity
+        try:
+            self.battery = self.charge / self.capacity
+        except ZeroDivisionError:
+            self.battery = None
 
     def telemetry(self):
         """
