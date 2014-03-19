@@ -16,9 +16,9 @@ It may also be imported directly, thus:
 
 .. code-block:: pycon
 
-    >>>import roowifi
-    >>>roomba = Roomba('12.34.56.78')
-    >>>roomba.clean()
+    >>> import roowifi
+    >>> roomba = Roomba('12.34.56.78')
+    >>> roomba.clean()
     ...
 
 Contribute:
